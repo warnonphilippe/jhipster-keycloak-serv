@@ -1,5 +1,6 @@
 package be.phw.serv.config;
 
+import be.phw.serv.multitenancy.CustomServiceUserInfoTokenServices;
 import be.phw.serv.security.AuthoritiesConstants;
 import be.phw.serv.security.oauth2.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -44,9 +45,10 @@ public class MicroserviceSecurityConfiguration extends ResourceServerConfigurerA
 
     @Bean
     @Primary
-    public UserInfoTokenServices userInfoTokenServices(PrincipalExtractor principalExtractor, AuthoritiesExtractor authoritiesExtractor) {
-        UserInfoTokenServices userInfoTokenServices =
-            new CachedUserInfoTokenServices(resourceServerProperties.getUserInfoUri(), resourceServerProperties.getClientId());
+    //ATTENTION, PATCH de la config Jhipster, on utilise CustomServiceUserInfoTokenServices
+    public CustomServiceUserInfoTokenServices userInfoTokenServices(PrincipalExtractor principalExtractor, AuthoritiesExtractor authoritiesExtractor) {
+        CustomServiceUserInfoTokenServices userInfoTokenServices =
+            new CustomServiceUserInfoTokenServices(resourceServerProperties.getUserInfoUri(), resourceServerProperties.getClientId());
 
         userInfoTokenServices.setPrincipalExtractor(principalExtractor);
         userInfoTokenServices.setAuthoritiesExtractor(authoritiesExtractor);
