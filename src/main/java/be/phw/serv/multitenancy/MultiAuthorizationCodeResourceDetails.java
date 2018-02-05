@@ -29,6 +29,7 @@ public class MultiAuthorizationCodeResourceDetails extends AuthorizationCodeReso
 
     private String getTenant(){
         //get selected tenant
+        //TODO : rechercher dans context ou de la secu
         return Optional.ofNullable(TenantContext.getCurrentTenant()).orElse(TenantUtils.TENANT_PATH_VAR);
     }
 }
